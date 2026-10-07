@@ -1,0 +1,49 @@
+[project]
+name = "ddcs-scraper"
+version = "0.1.0"
+description = "External TikTok scraping worker for ddcs-app"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.12"
+dependencies = [
+    "python-dotenv>=1.0",
+    "requests>=2.32",
+]
+
+[project.scripts]
+ddcs-scraper = "ddcs_scraper.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ddcs_scraper"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "F", "E", "W", "C90", "I", "N", "UP", "ANN", "S", "BLE", "B", "A", "C4",
+    "DTZ", "EM", "ISC", "G", "PIE", "T20", "PT", "Q", "RET", "SLF", "SIM",
+    "TID", "TC", "PTH", "ERA", "PL", "TRY", "PERF", "RUF",
+]
+ignore = [
+    "S101",
+    "COM812",
+    "ANN002",
+    "ANN003",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = ["SLF001", "PLR2004", "S105", "S106", "ANN"]
